@@ -27,6 +27,7 @@ values=$(jq -r '.params.values // "" | if type == "array" then .[] else . end' <
 wait_until_ready=$(jq -r '.params.wait_until_ready // 0' < $payload)
 debug=$(jq -r '.params.debug // "false"' < $payload)
 replace=$(jq -r '.params.replace // "false"' < $payload)
+force=$(jq -r '.params.replace // "false"' < $payload)
 delete=$(jq -r '.params.delete // "false"' < $payload)
 purge=$(jq -r '.params.purge // "false"' < $payload)
 devel=$(jq -r '.params.devel // "false"' < $payload)
@@ -107,6 +108,10 @@ helm_install() {
     if [ "$replace" = true ]; then
         helm_cmd="$helm_cmd --replace"
         helm_echo="$helm_echo --replace"
+    fi
+    if [ "$force" = true ]; then
+        helm_cmd="$helm_cmd --force"
+        helm_echo="$helm_echo --force"
     fi
     if [ "$debug" = true ]; then
         helm_cmd="$helm_cmd --dry-run --debug"
