@@ -5,8 +5,9 @@ RUN chmod +x /opt/resource/*
 
 RUN apk --no-cache add \
         tar \
+        bash \
         jq
 
-RUN helm plugin install https://github.com/viglesiasce/helm-gcs.git
+RUN helm init --client-only  && helm plugin install https://github.com/viglesiasce/helm-gcs.git
 
 ENTRYPOINT [ "/bin/bash" ]
