@@ -109,10 +109,6 @@ helm_install() {
         helm_cmd="$helm_cmd --replace"
         helm_echo="$helm_echo --replace"
     fi
-    if [ "$force" = true ]; then
-        helm_cmd="$helm_cmd --force"
-        helm_echo="$helm_echo --force"
-    fi
     if [ "$debug" = true ]; then
         helm_cmd="$helm_cmd --dry-run --debug"
         helm_echo="$helm_echo --dry-run --debug"
@@ -174,6 +170,10 @@ helm_upgrade() {
     if [ "$recreate_pods" = true ]; then
         helm_cmd="$helm_cmd --recreate-pods"
         helm_echo="$helm_echo --recreate-pods"
+    fi
+    if [ "$force" = true ]; then
+        helm_cmd="$helm_cmd --force"
+        helm_echo="$helm_echo --force"
     fi
     logfile="/tmp/log"
     mkdir -p /tmp
