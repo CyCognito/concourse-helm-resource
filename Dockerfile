@@ -1,4 +1,4 @@
-FROM cycognito/gcp-sdk-helm
+FROM cycognito/gcp-sdk-helm:32c6e8f
 
 ADD assets /opt/resource
 RUN chmod +x /opt/resource/*
