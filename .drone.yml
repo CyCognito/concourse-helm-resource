@@ -7,7 +7,6 @@ steps:
   image: cycognito/drone-docker-builder:latest
   settings:
     image: cycognito/concourse-helm-resource
-    tag: latest
     username: cycognito
     password:
       from_secret: docker_password
